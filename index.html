@@ -548,6 +548,21 @@ nav {
 .project:hover {
   border-color: #93c5fd;
 }
+
+    /* SCROLL PREMIUM ANIMATION */
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px) scale(0.97);
+  filter: blur(4px);
+  transition: 0.9s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
   </style>
 </head>
 
@@ -811,6 +826,21 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 document.querySelectorAll("section").forEach((el) => {
+  el.classList.add("hidden");
+  observer.observe(el);
+});
+</script>
+
+  <script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll("section, .project, .skill, .card").forEach((el) => {
   el.classList.add("hidden");
   observer.observe(el);
 });
